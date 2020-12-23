@@ -121,7 +121,7 @@ Forms
 2. Remove the margin in Firefox and Safari.
 */
 
-
+button,
 input {
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
@@ -134,11 +134,16 @@ Remove the inheritance of text transform in Edge and Firefox.
 1. Remove the inheritance of text transform in Firefox.
 */
 
+button { /* 1 */
+  text-transform: none;
+}
+
 /**
 Correct the inability to style clickable types in iOS and Safari.
 */
 
-
+button,
+[type='button'],
 [type='reset'] {
   -webkit-appearance: button;
 }
@@ -203,14 +208,25 @@ Add the correct display in Chrome and Safari.
 
 
 h2,
+h4,
 p {
   margin: 0;
+}
+
+button {
+  background-color: transparent;
+  background-image: none;
 }
 
 /**
  * Work around a Firefox/IE bug where the transparent `button` background
  * results in a loss of the default `button` focus styles.
  */
+
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
 
 
 ul {
@@ -310,8 +326,13 @@ input::placeholder {
   color: #9ca3af;
 }
 
+button {
+  cursor: pointer;
+}
 
-h2 {
+
+h2,
+h4 {
   font-size: inherit;
   font-weight: inherit;
 }
@@ -334,7 +355,7 @@ a {
  * normalize.css.
  */
 
-
+button,
 input {
   padding: 0;
   line-height: inherit;
@@ -418,9 +439,23 @@ img {
   background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
 }
 
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(245, 158, 11, var(--tw-bg-opacity));
+}
+
+.hover\:bg-yellow-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
+}
+
 .border-gray-800 {
   --tw-border-opacity: 1;
   border-color: rgba(31, 41, 55, var(--tw-border-opacity));
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-full {
@@ -445,6 +480,10 @@ img {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-center {
@@ -512,12 +551,20 @@ img {
   margin-top: 0.75rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
 
-.ml-24 {
-  margin-left: 6rem;
+.mt-12 {
+  margin-top: 3rem;
 }
 
 .hover\:opacity-75:hover {
@@ -534,9 +581,19 @@ img {
   padding-bottom: 0.25rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .py-6 {
@@ -617,6 +674,11 @@ img {
   color: rgba(156, 163, 175, var(--tw-text-opacity));
 }
 
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgba(31, 41, 55, var(--tw-text-opacity));
+}
+
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgba(217, 119, 6, var(--tw-text-opacity));
@@ -648,6 +710,10 @@ img {
   width: 1rem;
 }
 
+.w-6 {
+  width: 1.5rem;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -666,6 +732,10 @@ img {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-16 {
+  gap: 4rem;
 }
 
 .grid-cols-1 {
@@ -777,12 +847,20 @@ img {
     margin-left: 1.5rem;
   }
 
+  .md\:ml-24 {
+    margin-left: 6rem;
+  }
+
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1024px) {
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
   .lg\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));

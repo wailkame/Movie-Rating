@@ -13,5 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'index');
-Route::view('/movie', 'show');
+
+Route::get('/' , 'MoviesController@index')->name('movies.index');
+Route::get('/movie/{movie}', 'MoviesController@show')->name('movies.show');
+
+
+// for testing purposes
+// Route::view('/', 'index');
+// Route::view('/movie', 'show');
