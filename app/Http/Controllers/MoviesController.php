@@ -27,7 +27,7 @@ class MoviesController extends Controller
             return [$genre['id'] => $genre['name']];
         });
 
-        dump($nowPlaying);
+        //dump($nowPlaying);
         return view('index', [
             'popularMovies' => $popularMovies,
             'nowPlaying'    => $nowPlaying,    
@@ -65,6 +65,19 @@ class MoviesController extends Controller
     public function show($id)
     {
         //
+        $movie = Http::get('https://api.themoviedb.org/3/movie/'.$id.'?api_key=91880dc97fd583f0ebd6cfdc82412871&append_to_response=credits,videos,images')
+                ->json();
+
+        // $cast = Http::get('https://api.themoviedb.org/3/movie/'.$id.'/credits?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        //         ->json();        
+
+        dump($movie);        
+
+        return view('show', [
+
+            'movie' => $movie,
+
+        ]);
     }
 
     /**
