@@ -71,7 +71,7 @@ class MoviesController extends Controller
         // $cast = Http::get('https://api.themoviedb.org/3/movie/'.$id.'/credits?api_key=91880dc97fd583f0ebd6cfdc82412871')
         //         ->json();        
 
-        dump($movie);        
+        //dump($movie);        
 
         return view('show', [
 

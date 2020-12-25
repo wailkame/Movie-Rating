@@ -1,6 +1,14 @@
-<div class="relative md:ml-4 mt-3 md:mt-0">
-    
-    <input wire:model.debounce.500ms="search" type="text" class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:shadow-inner focus:ring-2" placeholder="Search">
+<div class="relative md:ml-4 mt-3 md:mt-0" x-data="{isOpen: true}" @click.away="isOpen = false">
+
+    <input 
+        wire:model.debounce.500ms="search" 
+        type="text" 
+        class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:shadow-inner focus:ring-2" 
+        placeholder="Search"
+        @focus = "isOpen = true"
+        @keydown = "isOpen = true"
+        @keydown.escape.window = "isOpen = false       "
+        >
     
     <div class="absolute top-0">
         <img src="/images/icons/search.png" class="w-4 mt-2 ml-2">
@@ -9,7 +17,7 @@
     <div wire:loading class="spinner top-0 right-0 mr-4 mt-4"></div>
 
     @if (strlen($search) > 2)
-        <div class="absolute bg-gray-800 text-sm rounded w-64 mt-4">
+        <div class="z-50 absolute bg-gray-800 text-sm rounded w-64 mt-4" x-show="isOpen">
             
             @if ($searchResults->count() > 0)
                 <ul>

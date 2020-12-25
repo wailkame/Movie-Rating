@@ -25,5 +25,8 @@
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
         "tailwindcss-spinner": "^1.2.0",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "alpinejs": "^2.8.0"
     }
 }

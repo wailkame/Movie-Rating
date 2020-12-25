@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Livewire\Livewire;
+
 use Illuminate\Support\Facades\Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -38,7 +38,7 @@ class ExampleTest extends TestCase
         Livewire::test('search-dropdown')
             ->assertDontSee('Black')
             ->set('search', 'Black')
-            ->assertSee('Black');
+            ->assertSee('Fake result');
     }
 
     private function fakePopularMovies()
