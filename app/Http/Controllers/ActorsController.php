@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ViewModels\ActorsViewModel;
 
 class ActorsController extends Controller
 {
@@ -14,6 +15,9 @@ class ActorsController extends Controller
     public function index()
     {
         //
+        $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US&page=1')
+        ->json()['results'];
+        $viewModel = new ActorsViewModel($popularActors);
         return view('actors.index');
     }
 
