@@ -7,7 +7,7 @@
         placeholder="Search"
         @focus = "isOpen = true"
         @keydown = "isOpen = true"
-        @keydown.escape.window = "isOpen = false "
+        @keydown.escape.window = "isOpen = false"
         >
     
     <div class="absolute top-0">
