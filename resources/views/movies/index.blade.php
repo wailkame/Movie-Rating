@@ -24,12 +24,13 @@
             <h2 class="uppercase tracking-wider text-yellow-600 text-lg font-semibold">Now Playing</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-8">
             
-                @if ($loop->index < 10)
-                    <x-movie-card :movie="$movie" :genres="$genres" />
-                @else
-                    @break
-                @endif        
-                
+                @foreach ($nowPlaying as $movie)         
+                    @if ($loop->index < 10)
+                        <x-movie-card :movie="$movie" :genres="$genres" />
+                    @else
+                        @break
+                    @endif        
+                @endforeach
                 {{-- end Now Playing --}}
             </div>
         </div> 
