@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ViewModels\ActorsViewModel;
+use Illuminate\Support\Facades\Http;
 
 class ActorsController extends Controller
 {
@@ -12,13 +13,14 @@ class ActorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($page = 1)
     {
         //
-        $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US&page=1')
+        $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US&page='.$page)
         ->json()['results'];
-        $viewModel = new ActorsViewModel($popularActors);
-        return view('actors.index');
+        //dd($popularActors);
+        $viewModel = new ActorsViewModel($popularActors , $page);
+        return view('actors.index', $viewModel);
     }
 
     /**
