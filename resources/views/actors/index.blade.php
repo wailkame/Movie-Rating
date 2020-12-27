@@ -10,11 +10,12 @@
                 @foreach ($popularActors as $actor)
                     @if ($loop->index < 9)
                         <div class="actor mt-8">
-                            <a href="#">
-                                <img class="hover:opacity-75 transition ease-in-out duration-150" src="https://ui-avatars.com/api/?size=235&name=JK" alt="profile_image">
+                            <a href="{{route('actors.show', $actor['id'])}}">
+                                <img class="hover:opacity-75 transition ease-in-out duration-150" src="{{$actor['profile_path']}}" alt="profile_image">
+                                {{-- https://ui-avatars.com/api/?size=235&name=JK --}}
                             </a>
                             <div class="mt-2">
-                                <a href="#" class="text-lg hover:text-gray-300">{{$actor['name']}}</a>
+                                <a href="{{route('actors.show', $actor['id'])}}" class="text-lg hover:text-gray-300">{{$actor['name']}}</a>
                                 <div class="text-sm truncate text-gray-400">{{$actor['known_for']}}</div>
                             </div>
                         </div>
@@ -28,16 +29,43 @@
             </div>       
             
         </div> {{-- end popular Actors --}}
-        
-        <div class="flex justify-between mt-16">
+        <div class="page-load-status">
+            <div class="flex justify-center my-8">
+                <p class="infinite-scroll-request spinner my-8 text-4xl">&nbsp;</p>
+            </div>
+            <p class="infinite-scroll-last">End of content</p>
+            <p class="infinite-scroll-error">No more pages to load</p>
+        </div>
+        {{-- <div class="flex justify-between mt-16">
+
             @if ($previous)
                 <a href="/actors/page/{{$previous}}">Previous</a>
+            @else
+                <div></div>
             @endif
 
             @if ($next)
                 <a href="/actors/page/{{$next}}">Next</a>
+            @else
+            <div></div>
             @endif
-        </div>
+
+        </div>  --}}
+        {{-- add next & previous button --}}
 
     </div>
+@endsection
+
+@section('script')
+<script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+    var elem = document.querySelector('.grid');
+    var infScroll = new InfiniteScroll( elem, {
+    // options
+    path: '/actors/page/@{{#}}',
+    append: '.actor',
+    status: '.page-load-status',
+    // history: false,
+    });
+</script>
 @endsection

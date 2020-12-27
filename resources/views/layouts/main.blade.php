@@ -40,5 +40,6 @@
     @yield('content')
     @livewireScripts
     <script src="/js/app.js"></script>
+    @yield('script')
 </body>
 </html>

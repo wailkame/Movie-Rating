@@ -16,6 +16,7 @@ class ActorsController extends Controller
     public function index($page = 1)
     {
         //
+        abort_if($page> 500 , 204);
         $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US&page='.$page)
         ->json()['results'];
         //dd($popularActors);
@@ -53,6 +54,7 @@ class ActorsController extends Controller
     public function show($id)
     {
         //
+        return view('actors.show');
     }
 
     /**

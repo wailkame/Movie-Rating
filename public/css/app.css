@@ -532,6 +532,10 @@ video {
   justify-content: flex-end;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .justify-between {
   justify-content: space-between;
 }
@@ -581,6 +585,11 @@ video {
   margin-right: 0.5rem;
 }
 
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -628,6 +637,10 @@ video {
 
 .mt-12 {
   margin-top: 3rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
 }
 
 .hover\:opacity-75:hover {
