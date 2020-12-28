@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/' , 'MoviesController@index')->name('movies.index');
-Route::get('/movie/{movie}', 'MoviesController@show')->name('movies.show');
+Route::get('/movie/{id}', 'MoviesController@show')->name('movies.show');
+
+Route::get('/tv' , 'tvController@index')->name('tv.index');
+Route::get('/tv/{id}', 'MoviesController@show')->name('tv.show');
 
 Route::get('/actors', 'ActorsController@index')->name('actors.index');
 Route::get('/actors/page/{page?}', 'ActorsController@index');
-Route::get('/actors/{actor}', 'ActorsController@show')->name('actors.show');
+Route::get('/actors/{id}', 'ActorsController@show')->name('actors.show');
 
 // for testing purposes
 // Route::view('/', 'index');

@@ -3,26 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ViewModels\ActorViewModel;
-use App\ViewModels\ActorsViewModel;
+use App\ViewModels\TvViewModel;
 use Illuminate\Support\Facades\Http;
 
-class ActorsController extends Controller
+class tvController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page = 1)
+    public function index()
     {
         //
-        abort_if($page> 500 , 204);
-        $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US&page='.$page)
-        ->json()['results'];
-        //dd($popularActors);
-        $viewModel = new ActorsViewModel($popularActors , $page);
-        return view('actors.index', $viewModel);
+        $populartv = Http::get('https://api.themoviedb.org/3/tv/popular?api_key=91880dc97fd583f0ebd6cfdc82412871')
+                        ->json()['results'];
+        $topRatedTv    = Http::get('https://api.themoviedb.org/3/tv/top_rated?api_key=91880dc97fd583f0ebd6cfdc82412871')
+                        ->json()['results'];
+        $genres = Http::get('https://api.themoviedb.org/3/genre/tv/list?api_key=91880dc97fd583f0ebd6cfdc82412871')
+                        ->json()['genres'];
+       
+        $viewModel = new TvViewModel(
+                $populartv,
+                $topRatedTv,
+                $genres,
+        );
+
+        return view('tv.index', $viewModel);
     }
 
     /**
@@ -55,16 +62,6 @@ class ActorsController extends Controller
     public function show($id)
     {
         //
-        $actor = Http::get('https://api.themoviedb.org/3/person/'.$id.'?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US')
-                ->json();
-        $social = Http::get('https://api.themoviedb.org/3/person/'.$id.'/external_ids?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US')
-                ->json();
-        $credits = Http::get('https://api.themoviedb.org/3/person/'.$id.'/combined_credits?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US')
-                  ->json();                
-        //dd($social);
-        $viewModel = new ActorViewModel($actor, $social, $credits);
-
-        return view('actors.show', $viewModel);
     }
 
     /**
