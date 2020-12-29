@@ -6,15 +6,16 @@
         <div class="popular-tv">
             <h2 class="uppercase tracking-wider text-yellow-600 text-lg font-semibold">Popular Tv Show</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-8">
-            
-                {{-- @foreach ($popularMovies as $movie)
+               
+                @foreach ($popularTv as $tvshow)
+                
                     @if ($loop->index < 10)
-                     <x-movie-card :movie="$movie" :genres="$genres" />
+                     <x-tv-card :tvshow="$tvshow"/>
                     @else
                         @break
                     @endif
                     
-                @endforeach --}}
+                @endforeach
                 
                 
             </div>       
@@ -24,13 +25,14 @@
             <h2 class="uppercase tracking-wider text-yellow-600 text-lg font-semibold">Top Rated Shows</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-8">
             
-                {{-- @foreach ($nowPlaying as $movie)         
+                @foreach ($topRatedTv as $tvshow)         
                     @if ($loop->index < 10)
-                        <x-movie-card :movie="$movie" :genres="$genres" />
+                        <x-tv-card :tvshow="$tvshow"/>
                     @else
                         @break
                     @endif        
-                @endforeach --}}
+                @endforeach
+                
                 {{-- end Now Playing --}}
             </div>
         </div> 

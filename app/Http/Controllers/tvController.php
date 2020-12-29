@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ViewModels\TvViewModel;
+use App\ViewModels\TvShowViewModel;
 use Illuminate\Support\Facades\Http;
 
 class tvController extends Controller
@@ -22,7 +23,7 @@ class tvController extends Controller
                         ->json()['results'];
         $genres = Http::get('https://api.themoviedb.org/3/genre/tv/list?api_key=91880dc97fd583f0ebd6cfdc82412871')
                         ->json()['genres'];
-       
+        dump($topRatedTv);
         $viewModel = new TvViewModel(
                 $popularTv,
                 $topRatedTv,
@@ -62,6 +63,11 @@ class tvController extends Controller
     public function show($id)
     {
         //
+        $tvshow = Http::get('https://api.themoviedb.org/3/tv/'.$id.'?api_key=91880dc97fd583f0ebd6cfdc82412871&append_to_response=videos,credits,images&language=en-US')
+                  ->json();
+        //dd($tvshow);
+        $viewModel = new TvShowViewModel($tvshow);
+        return view('tv.show', $viewModel);
     }
 
     /**

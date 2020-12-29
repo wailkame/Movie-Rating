@@ -18,7 +18,7 @@ Route::get('/' , 'MoviesController@index')->name('movies.index');
 Route::get('/movie/{id}', 'MoviesController@show')->name('movies.show');
 
 Route::get('/tv' , 'tvController@index')->name('tv.index');
-Route::get('/tv/{id}', 'MoviesController@show')->name('tv.show');
+Route::get('/tv/{id}', 'tvController@show')->name('tv.show');
 
 Route::get('/actors', 'ActorsController@index')->name('actors.index');
 Route::get('/actors/page/{page?}', 'ActorsController@index');
