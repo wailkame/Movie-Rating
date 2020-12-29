@@ -16,7 +16,7 @@ class tvController extends Controller
     public function index()
     {
         //
-        $populartv = Http::get('https://api.themoviedb.org/3/tv/popular?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $popularTv = Http::get('https://api.themoviedb.org/3/tv/popular?api_key=91880dc97fd583f0ebd6cfdc82412871')
                         ->json()['results'];
         $topRatedTv    = Http::get('https://api.themoviedb.org/3/tv/top_rated?api_key=91880dc97fd583f0ebd6cfdc82412871')
                         ->json()['results'];
@@ -24,7 +24,7 @@ class tvController extends Controller
                         ->json()['genres'];
        
         $viewModel = new TvViewModel(
-                $populartv,
+                $popularTv,
                 $topRatedTv,
                 $genres,
         );
