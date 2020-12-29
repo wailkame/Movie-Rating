@@ -15,23 +15,30 @@ class TvShowViewModel extends ViewModel
     }
 
     public function tvshow(){
+
         return collect($this->tvshow)->merge([
             'poster_path' => 'https://image.tmdb.org/t/p/w500/'.$this->tvshow['poster_path'],
             'vote_average' => $this->tvshow['vote_average']* 10 .'%',
-            'fist_air_date' => Carbon::parse($this->tvshow['first_air_date'])->format('M d, Y'),
+            'first_air_date' => Carbon::parse($this->tvshow['first_air_date'])->format('M d, Y'),
             'genres' => collect($this->tvshow['genres'])->pluck('name')->flatten()->implode(', '),
-            'crew'  => collect($this->tvshow['credits']['crew'])->take(2),
-            'cast'  => collect($this->tvshow['credits']['cast'])->take(5)->map(function($cast){
+            'crew'  => collect($this->tvshow['aggregate_credits']['crew'])->take(2),
+            'cast'  => collect($this->tvshow['aggregate_credits']['cast'])->take(5)->map(function($cast){
                 return collect($cast)->merge([
                     'profile_path' => $cast['profile_path']
                         ? 'https://image.tmdb.org/t/p/w300'.$cast['profile_path']
                         : 'https://via.placeholder.com/300x450',
                 ]);
             }),
-            'images' => collect($this->tvshow['images']['backdrops'])->take(9),
+            'images' => collect($this->tvshow['images']['backdrops'])->take(9)->map(function($image){
+                return [
+                    'small' => 'https://image.tmdb.org/t/p/w500/'.$image['file_path'],
+                    'original' => 'https://image.tmdb.org/t/p/original/'.$image['file_path']
+                ];
+            }),
         ])->only([
-            'poster_path', 'id', 'genres', 'name', 'vote_average', 'overview', 'first_air_date', 'credits', 
-            'videos', 'images', 'crew', 'cast', 'images'
-        ]);
+            'poster_path', 'id', 'genres', 'name', 'vote_average', 'overview', 'first_air_date', 
+            'videos', 'images', 'crew', 'cast', 'created_by',
+
+        ])->dump();
     }
 }

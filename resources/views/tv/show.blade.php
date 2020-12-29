@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="movie-info border-b border-gray-800">
+    <div class="tv-info border-b border-gray-800">
         <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
             <img src="{{$tvshow['poster_path']}}"  class="w-96">
             <div class="mt-3 md:ml-24">
@@ -22,15 +22,16 @@
                 <p class="text-gray-300 mt-8">
                     {{$tvshow['overview']}}
                 </p>
-                @if (count($tvshow['credits']['cast']) != Null)
+
+                
                     <div class="mt-12">
                         <h4 class="text-white font-semibold">Featured Cast</h4>
                         <div class="flex mt-4">
-                            @foreach ($tvshow['credits']['cast'] as $cast)
+                            @foreach ($tvshow['created_by'] as $crew)
                                
                                 <div class="mr-6">
-                                    <div>{{$cast['original_name']}}</div>
-                                    <div class="text-sm text-gray-400">{{$cast['character']}}</div>
+                                    <div>{{$crew['name']}}</div>
+                                    <div class="text-sm text-gray-400">Director</div>
                                 </div>
                                
                             @endforeach
@@ -38,7 +39,7 @@
                             
                         </div>
                     </div>
-                @endif
+                
                 
                 
                 <div x-data="{isOpen: false}">
@@ -56,7 +57,7 @@
                         </div>
                     @endif
                     {{-- Model for video --}}
-                    {{-- <div
+                    <div
                     style="background-color: rgba(0, 0, 0, .5);display:none;"
                     class="fixed top-0 left-0 w-full flex items-center shadow-lg overflow-y-auto"
                     x-show.transition.opacity="isOpen"
@@ -75,7 +76,7 @@
                             </div>
                         </div>
 
-                    </div> --}}
+                    </div>
 
                 </div>        
                 
@@ -85,34 +86,32 @@
             </div>
         </div>
     </div> 
-    {{-- end movie info --}}
+    {{-- end tv info --}}
 
 
-    {{-- <div class="movie-cast border-b border-gray-800">
+    <div class="movie-cast border-b border-gray-800">
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Cast</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-8">
 
-                @foreach ($tvshow['credits']['cast'] as $cast)
+                @foreach ($tvshow['cast'] as $cast)
                     @if ($loop->index < 5)
                         <div class="mt-8">
                             <a href="{{route('actors.show', $cast['id'])}}">
                                 @if ($cast['profile_path'] != Null)
 
-                                    <img src="{{'https://image.tmdb.org/t/p/w500/'.$cast['profile_path']}}" alt="{{$cast['original_name']}}" class="hover:opacity-75 transition ease-in-out duration-150">
+                                    <img src="{{ $cast['profile_path']}}" alt="{{$cast['name']}}" class="hover:opacity-75 transition ease-in-out duration-150">
 
                                 @else
 
-                                    <img src="{{'https://via.placeholder.com/438x657.png?text=Not Found'}}" alt="{{$cast['original_name']}}" class="hover:opacity-75 transition ease-in-out duration-150">
+                                    <img src="{{$cast['profile_path']}}" alt="{{$cast['name']}}" class="hover:opacity-75 transition ease-in-out duration-150">
                                 
                                 @endif
                                 
                             </a>
                             <div class="mt-2">
-                                <a href="{{route('actors.show', $cast['id'])}}" class="text-lg mt-2 hover:text-gray-600">{{$cast['original_name']}}</a>
-                                <div class="text-gray-400 text-sm">
-                                    {{$cast['character']}}
-                                </div>
+                                <a href="{{route('actors.show', $cast['id'])}}" class="text-lg mt-2 hover:text-gray-600">{{$cast['name']}}</a>
+                               
                             </div>
                         </div>
                     @else
@@ -123,34 +122,34 @@
                 
             </div>
         </div>
-    </div> --}}
-    {{-- end movie cast --}}
+    </div>
+    {{-- end tv cast --}}
 
-    {{-- <div class="movie-images border-b border-gray-800" x-data="{isOpen : false, image: ''}">
+    <div class="tv-images border-b border-gray-800" x-data="{isOpen : false, image: ''}">
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Images</h2>
             <div class="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-3 gap-16">
                 
-                @foreach ($tvshow['images']['backdrops'] as $image)
+                @foreach ($tvshow['images'] as $image)
                     @if ($loop->index < 9)
                         <div class="mt-8">
                             <a 
                             @click.prevent="
                                 isOpen = true 
-                                image='{{"https://image.tmdb.org/t/p/original/".$image["file_path"]}}'"
+                                image='{{ $image["original"]}}'"
                             href="#">
-                                <img src="{{'https://image.tmdb.org/t/p/w500/'.$image['file_path']}}" class="hover:opacity-75 transition ease-in-out duration-150" >
+                                <img src="{{ $image['small'] }}" class="hover:opacity-75 transition ease-in-out duration-150" >
                             </a>
-                        </div>
+                        </div> 
                     @else
                         @break
                     @endif
                 @endforeach
                
             </div>
-        </div> --}}
+        </div>
         {{-- This Model is for showing images --}}
-        {{-- <div
+        <div
         style="background-color: rgba(0, 0, 0, .5);display:none;"
         class="fixed top-0 left-0 w-full flex items-center shadow-lg overflow-y-auto"
         x-show.transition.opacity="isOpen"
@@ -170,7 +169,7 @@
             </div>
 
         </div>
-    </div> --}}
+    </div>
     {{-- end movie images --}}
 @endsection
 
