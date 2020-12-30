@@ -4,7 +4,7 @@
     <div class="movie-info border-b border-gray-800">
         <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
             <div class="flex-none">
-                <img src="" alt="profile image" class="w-76">
+                <img src="{{$actor['profile_path']}}" alt="profile image" class="w-76">
                 <ul class="flex items-center mt-4">
                     @if ($social['facebook'])
                         <li>

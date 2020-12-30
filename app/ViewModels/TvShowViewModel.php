@@ -39,6 +39,6 @@ class TvShowViewModel extends ViewModel
             'poster_path', 'id', 'genres', 'name', 'vote_average', 'overview', 'first_air_date', 
             'videos', 'images', 'crew', 'cast', 'created_by',
 
-        ])->dump();
+        ]);
     }
 }

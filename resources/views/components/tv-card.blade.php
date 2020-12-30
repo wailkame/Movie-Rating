@@ -1,6 +1,6 @@
 <div class="mt-8">
     <a href="{{route('tv.show', $tvshow['id'])}}">
-        <img src="" alt="parasite" class="hover:opacity-75 transition ease-in-out duration-150 ">
+        <img src="{{$tvshow['poster_path']}}" alt="tvshow" class="hover:opacity-75 transition ease-in-out duration-150 ">
     </a>
     <div class="mt-2">
     <a href="{{route('tv.show', $tvshow['id'])}}" class="text-lg mt-2 hover:text-gray-600">{{ $tvshow['name']}}</a>
@@ -12,7 +12,7 @@
             <span class="mx-2">|</span>
             <span >{{$tvshow['first_air_date']}}</span>
         </div>
-        <div class="text-gray-400 text-sm">
+        <div class="text-gray-400 text-sm truncate">
             {{$tvshow['genres']}}
         </div>
     </div>

@@ -87,7 +87,7 @@ class ActorViewModel extends ViewModel
                 'title' => $title,
                 'character' => isset($movie['character']) ? $movie['character']:  '',
             ]);
-        })->sortByDesc('release_date')->take(15)->dump();
+        })->sortByDesc('release_date')->take(15);
         
     }
 }
