@@ -17,11 +17,11 @@ class tvController extends Controller
     public function index()
     {
         //
-        $popularTv = Http::get('https://api.themoviedb.org/3/tv/popular?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $popularTv = Http::get('https://api.themoviedb.org/3/tv/popular?api_key='.config('services.tmdb.token'))
                         ->json()['results'];
-        $topRatedTv    = Http::get('https://api.themoviedb.org/3/tv/top_rated?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $topRatedTv    = Http::get('https://api.themoviedb.org/3/tv/top_rated?api_key='.config('services.tmdb.token'))
                         ->json()['results'];
-        $genres = Http::get('https://api.themoviedb.org/3/genre/tv/list?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $genres = Http::get('https://api.themoviedb.org/3/genre/tv/list?api_key='.config('services.tmdb.token'))
                         ->json()['genres'];
         //dump($topRatedTv);
         $viewModel = new TvViewModel(
@@ -63,7 +63,7 @@ class tvController extends Controller
     public function show($id)
     {
         //
-        $tvshow = Http::get('https://api.themoviedb.org/3/tv/'.$id.'?api_key=91880dc97fd583f0ebd6cfdc82412871&append_to_response=videos,aggregate_credits,images')
+        $tvshow = Http::get('https://api.themoviedb.org/3/tv/'.$id.'?api_key='.config('services.tmdb.token').'&append_to_response=videos,aggregate_credits,images')
                   ->json();   
 
         //dd($tvshow);

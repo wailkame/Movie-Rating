@@ -12,7 +12,7 @@
                         <div class="actor mt-8">
                             <a href="{{route('actors.show', $actor['id'])}}">
                                 <img class="hover:opacity-75 transition ease-in-out duration-150" src="{{$actor['profile_path']}}" alt="profile_image">
-                                {{-- https://ui-avatars.com/api/?size=235&name=JK --}}
+                                
                             </a>
                             <div class="mt-2">
                                 <a href="{{route('actors.show', $actor['id'])}}" class="text-lg hover:text-gray-300">{{$actor['name']}}</a>

@@ -18,7 +18,7 @@ class ActorsController extends Controller
     {
         //
         abort_if($page> 500 , 204);
-        $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US&page='.$page)
+        $popularActors = Http::get('https://api.themoviedb.org/3/person/popular?api_key='.config('services.tmdb.token').'&language=en-US&page='.$page)
         ->json()['results'];
         //dd($popularActors);
         $viewModel = new ActorsViewModel($popularActors , $page);
@@ -55,11 +55,11 @@ class ActorsController extends Controller
     public function show($id)
     {
         //
-        $actor = Http::get('https://api.themoviedb.org/3/person/'.$id.'?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US')
+        $actor = Http::get('https://api.themoviedb.org/3/person/'.$id.'?api_key='.config('services.tmdb.token').'&language=en-US')
                 ->json();
-        $social = Http::get('https://api.themoviedb.org/3/person/'.$id.'/external_ids?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US')
+        $social = Http::get('https://api.themoviedb.org/3/person/'.$id.'/external_ids?api_key='.config('services.tmdb.token').'&language=en-US')
                 ->json();
-        $credits = Http::get('https://api.themoviedb.org/3/person/'.$id.'/combined_credits?api_key=91880dc97fd583f0ebd6cfdc82412871&language=en-US')
+        $credits = Http::get('https://api.themoviedb.org/3/person/'.$id.'/combined_credits?api_key='.config('services.tmdb.token').'&language=en-US')
                   ->json();                
         //dd($social);
         $viewModel = new ActorViewModel($actor, $social, $credits);

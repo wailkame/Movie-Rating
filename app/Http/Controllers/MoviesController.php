@@ -16,11 +16,11 @@ class MoviesController extends Controller
     {
         //when use token use this method
         // Http::withToken(config(services.tmdb.token))->get('website')->json() and add token to config/services.php
-        $popularMovies = Http::get('https://api.themoviedb.org/3/movie/popular?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $popularMovies = Http::get('https://api.themoviedb.org/3/movie/popular?api_key='.config('services.tmdb.token'))
                         ->json()['results'];
-        $nowPlaying    = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $nowPlaying    = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key='.config('services.tmdb.token'))
                         ->json()['results'];
-        $genresArray = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=91880dc97fd583f0ebd6cfdc82412871')
+        $genresArray = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key='.config('services.tmdb.token'))
                         ->json()['genres'];
 
         $genres = collect($genresArray)->mapWithKeys(function($genre){
@@ -65,7 +65,7 @@ class MoviesController extends Controller
     public function show($id)
     {
         //
-        $movie = Http::get('https://api.themoviedb.org/3/movie/'.$id.'?api_key=91880dc97fd583f0ebd6cfdc82412871&append_to_response=credits,videos,images')
+        $movie = Http::get('https://api.themoviedb.org/3/movie/'.$id.'?api_key='.config('services.tmdb.token').'&append_to_response=credits,videos,images')
                 ->json();
 
         // $cast = Http::get('https://api.themoviedb.org/3/movie/'.$id.'/credits?api_key=91880dc97fd583f0ebd6cfdc82412871')
