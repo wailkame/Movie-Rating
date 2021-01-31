@@ -1,4 +1,4 @@
-# Laravel-Vue SPA CRUD
+# Laravel Movies Rating App
 
 
 
